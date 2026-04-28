@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String            @id @default(cuid())
+  discordId            String            @unique
+  birthday             DateTime?
+  birthdayLocked       Boolean           @default(false)
+  birthdayPingEnabled  Boolean           @default(true)
+  lastBirthdayPingYear Int?
+  totalXp              Int               @default(0)
+  visibleLevel         Int               @default(0)
+  prestigeUnlocked     Boolean           @default(false)
+  prestigeLevel        Int               @default(0)
+  messageCount         Int               @default(0)
+  voiceMinutes         Int               @default(0)
+  reactionsGiven       Int               @default(0)
+  repliesSent          Int               @default(0)
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+  medals               UserMedal[]
+  achievements         UserAchievement[]
+  cooldowns            Cooldown[]
+  verificationCodes    VerificationChallenge[]
+  levelEvents          LevelEvent[]
+  xpEvents             XpEvent[]
+}
+
+model Medal {
+  id        String      @id @default(cuid())
+  displayId String      @unique
+  emoji     String
+  name      String
+  createdAt DateTime    @default(now())
+  users     UserMedal[]
+}
+
+model UserMedal {
+  id        String   @id @default(cuid())
+  userId    String
+  medalId   String
+  awardedBy String
+  awardedAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  medal     Medal    @relation(fields: [medalId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, medalId])
+}
+
+model Achievement {
+  id            String            @id @default(cuid())
+  key           String            @unique
+  category      String
+  tier          Int
+  name          String
+  description   String
+  requiredValue Int
+  xpReward      Int
+  icon          String?
+  createdAt     DateTime          @default(now())
+  users         UserAchievement[]
+}
+
+model UserAchievement {
+  id            String      @id @default(cuid())
+  userId        String
+  achievementId String
+  unlockedAt    DateTime    @default(now())
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+}
+
+model Cooldown {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, type])
+}
+
+model SystemMessage {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  channelId String
+  messageId String
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationChallenge {
+  id        String   @id @default(cuid())
+  userId    String
+  code      String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model SecurityBypass {
+  id        String   @id @default(cuid())
+  type      String
+  expiresAt DateTime
+  createdBy String
+  createdAt DateTime @default(now())
+}
+
+model LevelEvent {
+  id        String   @id @default(cuid())
+  userId    String
+  level     Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model XpEvent {
+  id        String   @id @default(cuid())
+  userId    String
+  source    String
+  amount    Int
+  metadata  Json?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, source])
+}

@@ -1,0 +1,8 @@
+{
+  "youngAccountDays": 14,
+  "autoVerifyScoreThreshold": 4,
+  "captcha": {
+    "length": 6,
+    "expiresInMinutes": 15
+  }
+}

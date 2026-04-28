@@ -1,0 +1,19 @@
+{
+  "textXp": {
+    "cooldownSeconds": 60,
+    "replyBonus": 5,
+    "replyCooldownSeconds": 60,
+    "tiers": {
+      "short": { "minLength": 1, "maxLength": 24, "minXp": 10, "maxXp": 15 },
+      "normal": { "minLength": 25, "maxLength": 149, "minXp": 20, "maxXp": 30 },
+      "long": { "minLength": 150, "maxLength": 499, "minXp": 35, "maxXp": 50 },
+      "veryLong": { "minLength": 500, "maxLength": 999999, "minXp": 50, "maxXp": 60 }
+    }
+  },
+  "voiceXpPerMinute": 3,
+  "reactionXp": 5,
+  "reactionCooldownSeconds": 300,
+  "excludedTextChannelIds": [],
+  "excludedVoiceChannelIds": [],
+  "excludedParentChannelIds": []
+}
