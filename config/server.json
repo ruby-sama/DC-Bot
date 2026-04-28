@@ -1,0 +1,50 @@
+{
+  "guildId": "",
+  "timezone": "Europe/Berlin",
+  "colors": {
+    "default": "#89CFF0",
+    "profile": "#89CFF0",
+    "rules": "#89CFF0",
+    "level": "#89CFF0",
+    "achievement": "#89CFF0"
+  },
+  "roles": {
+    "verifiedRole": "",
+    "adminRoles": [],
+    "highestRoles": [],
+    "regionRoles": [],
+    "nsfwRole": "598639164849651723",
+    "ventingRole": "1481985067231219753",
+    "mentalHealthRole": "1340838230395850792",
+    "ageRoleU18": "723999965302489101",
+    "ageRole18_24": "723999967462817872",
+    "ageRole25_30": "723999969043939359",
+    "ageRole30Plus": "723999970444705963",
+    "birthdayRole": "865149780177977355",
+    "levelRoles": {
+      "10": "",
+      "20": "",
+      "30": "",
+      "40": "",
+      "50": "",
+      "60": "",
+      "70": "",
+      "80": "",
+      "90": "",
+      "100": ""
+    }
+  },
+  "channels": {
+    "birthdayChannel": "647490776154243073",
+    "modWarnChannel": "615494449774067719",
+    "supportChannel": "835995958243360808",
+    "privacyThread": "1476705958234427422",
+    "spamChannel": "",
+    "rulesChannel": "",
+    "verificationChannel": "",
+    "levelChannel": "",
+    "achievementChannel": "",
+    "joinLogChannel": "",
+    "securityLogChannel": ""
+  }
+}
